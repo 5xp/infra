@@ -5,6 +5,7 @@
       git
       onepassword
       discord
+      chatterino
     ];
 
     home.username = "chris";
