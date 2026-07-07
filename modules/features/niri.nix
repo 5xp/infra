@@ -14,6 +14,7 @@
   perSystem =
     {
       pkgs,
+      self',
       lib,
       ...
     }:
@@ -24,6 +25,10 @@
           xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
           prefer-no-csd = true;
           clipboard.disable-primary = true; # disables middle-click paste
+
+          spawn-at-startup = [
+            (lib.getExe self'.packages.myNoctalia)
+          ];
 
           input = {
             keyboard = {
