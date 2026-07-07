@@ -34,6 +34,7 @@
 
       boot = {
         kernelPackages = pkgs.linuxPackages_latest;
+        supportedFilesystems.ntfs = true;
         loader.systemd-boot.enable = true;
         loader.efi.canTouchEfiVariables = true;
       };
@@ -57,13 +58,23 @@
         LC_TIME = "en_US.UTF-8";
       };
 
-      fileSystems."/mnt/arch" = {
-        device = "/dev/disk/by-uuid/750a353a-dd88-4ae2-aec3-c179c59ab67f";
-        fsType = "ext4";
-        options = [
-          "defaults"
-          "nofail"
-        ];
+      fileSystems = {
+        "/mnt/arch" = {
+          device = "/dev/disk/by-uuid/750a353a-dd88-4ae2-aec3-c179c59ab67f";
+          fsType = "ext4";
+          options = [
+            "defaults"
+            "nofail"
+            "x-gvfs-show"
+          ];
+        };
+        "/mnt/windows-games" = {
+          device = "/dev/disk/by-uuid/E018DAD918DAADB2";
+          fsType = "ntfs3";
+          options = [
+            "x-gvfs-show"
+          ];
+        };
       };
 
       services.displayManager.sddm = {
@@ -104,6 +115,16 @@
               };
             }
           ];
+        };
+      };
+
+      hardware.bluetooth = {
+        enable = true;
+        powerOnBoot = true;
+        settings = {
+          General = {
+            Enable = "Source,Sink,Media,Socket";
+          };
         };
       };
 
