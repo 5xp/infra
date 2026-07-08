@@ -1,12 +1,15 @@
 { ... }:
 {
-  flake.modules.nixos.onepassword = {
-    programs._1password.enable = true;
-    programs._1password-gui = {
-      enable = true;
-      polkitPolicyOwners = [ "chris" ];
+  flake.modules.nixos.onepassword =
+    { config, lib, ... }:
+    {
+      programs._1password.enable = true;
+      programs._1password-gui = {
+        enable = true;
+        polkitPolicyOwners = [ "chris" ];
+      };
+
     };
-  };
 
   flake.modules.homeManager.onepassword =
     { pkgs, lib, ... }:

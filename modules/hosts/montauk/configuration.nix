@@ -14,6 +14,7 @@
         helix
         onepassword
         steam
+        helium
       ];
 
       environment.systemPackages = with pkgs; [
