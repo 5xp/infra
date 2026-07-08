@@ -20,8 +20,10 @@
           nixd
         ];
 
+        themes.vague = builtins.readFile ./vague.toml;
+
         settings = {
-          theme = "rose_pine";
+          theme = "vague";
           editor = {
             line-number = "relative";
             color-modes = true;
