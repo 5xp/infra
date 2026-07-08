@@ -7,10 +7,12 @@
       onepassword
       discord
       chatterino
+      cli
     ];
 
     home.username = "chris";
     home.stateVersion = "25.05";
+    programs.fish.enable = true;
   };
 
   flake.modules.nixos.chris =
