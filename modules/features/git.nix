@@ -18,6 +18,12 @@
       settings = {
         user.name = "chris";
         user.email = "62446202+5xp@users.noreply.github.com";
+        "--scope" = [
+          {
+            "--when".environments = [ "JJUI" ];
+            ui.diff-formatter = "delta";
+          }
+        ];
       };
     };
 
