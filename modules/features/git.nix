@@ -6,11 +6,6 @@
       settings = {
         user.name = "chris";
         user.email = "62446202+5xp@users.noreply.github.com";
-        alias = {
-          flog = "log --follow --stat --";
-          flogp = "log --follow -p --";
-          lg = "log --graph --pretty=format:'%C(yellow)%h%Creset -%Cred%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --all --";
-        };
       };
       ignores = [
         ".DS_Store"
@@ -26,12 +21,19 @@
       };
     };
 
+    programs.jjui.enable = true;
+
     programs.delta = {
       enable = true;
       enableGitIntegration = true;
       enableJujutsuIntegration = true;
       options = {
+        syntax-theme = "base16";
         line-numbers = true;
+        file-style = "bold blue";
+        file-decoration-style = "blue ul";
+        hunk-header-style = "file line-number";
+        hunk-header-decoration-style = "omit";
       };
     };
   };
