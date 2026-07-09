@@ -15,6 +15,7 @@
         onepassword
         steam
         helium
+        flatpak
       ];
 
       environment.systemPackages = with pkgs; [
