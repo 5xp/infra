@@ -3,6 +3,7 @@
   flake.modules.homeManager.chris = {
     imports = with self.modules.homeManager; [
       helium
+      ghostty
       git
       onepassword
       discord
