@@ -9,6 +9,7 @@
       discord
       chatterino
       cli
+      spotify
     ];
 
     home.username = "chris";
