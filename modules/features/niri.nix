@@ -18,6 +18,9 @@
       lib,
       ...
     }:
+    let
+      myNoctaliaExe = lib.getExe self'.packages.myNoctalia;
+    in
     {
       packages.myNiri = inputs.wrapper-modules.wrappers.niri.wrap {
         inherit pkgs;
@@ -27,7 +30,7 @@
           clipboard.disable-primary = true; # disables middle-click paste
 
           spawn-at-startup = [
-            (lib.getExe self'.packages.myNoctalia)
+            myNoctaliaExe
           ];
 
           input = {
@@ -47,7 +50,21 @@
 
           layout = {
             gaps = 6;
-            border.width = 2;
+            border = {
+              width = 2;
+              active-color = "#bb9dbd";
+              inactive-color = "#333738";
+              urgent-color = "#d8647e";
+            };
+            focus-ring = {
+              width = 1;
+              active-color = "#bb9dbd";
+              inactive-color = "#333738";
+              urgent-color = "#00000000";
+            };
+            tab-indicator = {
+              place-within-column = _: { };
+            };
           };
 
           window-rules = [
@@ -56,6 +73,21 @@
               geometry-corner-radius = 8;
             }
           ];
+
+          # https://docs.noctalia.dev/v4/getting-started/compositor-settings/niri/
+          layer-rules = [
+            {
+              match = _: {
+                props = {
+                  namespace = "^noctalia-overview*";
+                };
+              };
+              place-within-backdrop = true;
+            }
+          ];
+          debug = {
+            honor-xdg-activation-with-invalid-serial = _: { };
+          };
 
           outputs = {
             "DP-3" = {
@@ -80,10 +112,15 @@
             };
           };
 
+          recent-windows = {
+            open-delay-ms = 100;
+          };
+
           binds = {
             "Mod+Return".spawn-sh = lib.getExe pkgs.ghostty;
             "Mod+E".spawn-sh = lib.getExe pkgs.kdePackages.dolphin;
-            "Mod+R".spawn-sh = lib.getExe pkgs.fuzzel;
+            "Mod+R".spawn-sh = "${myNoctaliaExe} ipc call launcher toggle";
+            "Alt+L".spawn-sh = "${myNoctaliaExe} ipc call lockScreen lock";
 
             "Mod+Q".close-window = _: { };
             "Mod+Tab".toggle-overview = _: { };
@@ -107,8 +144,21 @@
 
             "Mod+W".toggle-column-tabbed-display = _: { };
 
-            "Print".screenshot = _: { };
-            "Alt+Print".screenshot-window = _: { };
+            "Mod+Shift+S".screenshot = _: {
+              props = {
+                show-pointer = false;
+              };
+            };
+            "Print".screenshot-screen = _: {
+              props = {
+                show-pointer = false;
+              };
+            };
+            "Alt+Print".screenshot-window = _: {
+              props = {
+                show-pointer = false;
+              };
+            };
 
             "Mod+H".focus-column-left = _: { };
             "Mod+J".focus-window-or-workspace-down = _: { };
@@ -177,46 +227,70 @@
             "Mod+Comma".consume-window-into-column = _: { };
             "Mod+Period".expel-window-from-column = _: { };
 
-            "XF86AudioRaiseVolume".spawn = [
-              "wpctl"
-              "set-volume"
-              "@DEFAULT_AUDIO_SINK@"
-              "4%+"
-            ];
-            "XF86AudioLowerVolume".spawn = [
-              "wpctl"
-              "set-volume"
-              "@DEFAULT_AUDIO_SINK@"
-              "4%-"
-            ];
-            "XF86AudioMute".spawn = [
-              "wpctl"
-              "set-mute"
-              "@DEFAULT_AUDIO_SINK@"
-              "toggle"
-            ];
-            "XF86AudioMicMute".spawn = [
-              "wpctl"
-              "set-mute"
-              "@DEFAULT_AUDIO_SOURCE@"
-              "toggle"
-            ];
-            "XF86AudioPlay".spawn = [
-              (lib.getExe pkgs.playerctl)
-              "play-pause"
-            ];
-            "XF86AudioPause".spawn = [
-              (lib.getExe pkgs.playerctl)
-              "play-pause"
-            ];
-            "XF86AudioNext".spawn = [
-              (lib.getExe pkgs.playerctl)
-              "next"
-            ];
-            "XF86AudioPrev".spawn = [
-              (lib.getExe pkgs.playerctl)
-              "previous"
-            ];
+            "XF86AudioRaiseVolume" = _: {
+              props.allow-when-locked = true;
+              content.spawn = [
+                "wpctl"
+                "set-volume"
+                "@DEFAULT_AUDIO_SINK@"
+                "4%+"
+              ];
+            };
+            "XF86AudioLowerVolume" = _: {
+              props.allow-when-locked = true;
+              content.spawn = [
+                "wpctl"
+                "set-volume"
+                "@DEFAULT_AUDIO_SINK@"
+                "4%-"
+              ];
+            };
+            "XF86AudioMute" = _: {
+              props.allow-when-locked = true;
+              content.spawn = [
+                "wpctl"
+                "set-mute"
+                "@DEFAULT_AUDIO_SINK@"
+                "toggle"
+              ];
+            };
+            "XF86AudioMicMute" = _: {
+              props.allow-when-locked = true;
+              content.spawn = [
+                "wpctl"
+                "set-mute"
+                "@DEFAULT_AUDIO_SOURCE@"
+                "toggle"
+              ];
+            };
+            "XF86AudioPlay" = _: {
+              props.allow-when-locked = true;
+              content.spawn = [
+                (lib.getExe pkgs.playerctl)
+                "play-pause"
+              ];
+            };
+            "XF86AudioPause" = _: {
+              props.allow-when-locked = true;
+              content.spawn = [
+                (lib.getExe pkgs.playerctl)
+                "play-pause"
+              ];
+            };
+            "XF86AudioNext" = _: {
+              props.allow-when-locked = true;
+              content.spawn = [
+                (lib.getExe pkgs.playerctl)
+                "next"
+              ];
+            };
+            "XF86AudioPrev" = _: {
+              props.allow-when-locked = true;
+              content.spawn = [
+                (lib.getExe pkgs.playerctl)
+                "previous"
+              ];
+            };
           };
         };
       };
