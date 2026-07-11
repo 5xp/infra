@@ -16,6 +16,7 @@
         steam
         helium
         flatpak
+        tailscale
       ];
 
       environment.systemPackages = with pkgs; [
