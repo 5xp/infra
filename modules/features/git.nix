@@ -5,7 +5,7 @@
       enable = true;
       settings = {
         user.name = "chris";
-        user.email = "62446202+5xp@users.noreply.github.com";
+        user.email = "chris@cflo.dev";
       };
       ignores = [
         ".DS_Store"
@@ -18,7 +18,7 @@
       enable = true;
       settings = {
         user.name = "chris";
-        user.email = "62446202+5xp@users.noreply.github.com";
+        user.email = "chris@cflo.dev";
         "--scope" = [
           {
             "--when".environments = [ "JJUI" ];
