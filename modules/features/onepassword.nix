@@ -1,7 +1,7 @@
 { ... }:
 {
   flake.modules.nixos.onepassword =
-    { config, lib, ... }:
+    { pkgs, lib, ... }:
     {
       programs._1password.enable = true;
       programs._1password-gui = {
@@ -9,6 +9,15 @@
         polkitPolicyOwners = [ "chris" ];
       };
 
+      systemd.user.services._1password = {
+        description = "1Password";
+        wantedBy = [ "graphical-session.target" ];
+        partOf = [ "graphical-session.target" ];
+        after = [ "graphical-session.target" ];
+        serviceConfig = {
+          ExecStart = "${lib.getExe pkgs._1password-gui} --silent";
+        };
+      };
     };
 
   flake.modules.homeManager.onepassword =
