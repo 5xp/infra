@@ -10,6 +10,7 @@
       chatterino
       cli
       spotify
+      mpv
     ];
 
     home.username = "chris";

@@ -15,6 +15,7 @@
         onepassword
         steam
         helium
+        mpv
         flatpak
         tailscale
       ];
