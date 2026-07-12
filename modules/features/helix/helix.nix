@@ -39,6 +39,19 @@
               normal = "block";
             };
           };
+          keys = {
+            normal = {
+              tab = "move_parent_node_end";
+              S-tab = "move_parent_node_start";
+            };
+            insert = {
+              S-tab = "move_parent_node_start";
+            };
+            select = {
+              tab = "extend_parent_node_end";
+              S-tab = "extend_parent_node_start";
+            };
+          };
         };
 
         languages = {
