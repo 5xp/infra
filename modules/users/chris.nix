@@ -11,6 +11,7 @@
       cli
       spotify
       mpv
+      obs
     ];
 
     home.username = "chris";
