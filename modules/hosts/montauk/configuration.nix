@@ -18,6 +18,7 @@
         mpv
         flatpak
         tailscale
+        stremio
       ];
 
       environment.systemPackages = with pkgs; [
