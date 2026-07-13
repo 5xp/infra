@@ -31,6 +31,11 @@
 
           spawn-at-startup = [
             myNoctaliaExe
+            "helium"
+            "steam"
+            "chatterino"
+            "vesktop"
+            "spotify"
           ];
 
           input = {
@@ -67,10 +72,81 @@
             };
           };
 
+          workspaces = {
+            "browser".open-on-output = "DP-3";
+            "games".open-on-output = "DP-3";
+            "chat".open-on-output = "DP-1";
+            "music".open-on-output = "DP-1";
+          };
+
           window-rules = [
             {
               clip-to-geometry = true;
               geometry-corner-radius = 8;
+            }
+            {
+              match = _: {
+                props = {
+                  title = "^Picture in picture$";
+                };
+              };
+              open-floating = true;
+            }
+
+            # startup app rules
+            {
+              match = _: {
+                props = {
+                  app-id = "helium";
+                  at-startup = true;
+                };
+              };
+              open-on-workspace = "browser";
+              open-maximized = true;
+            }
+            {
+              match = _: {
+                props = {
+                  app-id = "steam";
+                };
+              };
+              open-on-workspace = "games";
+              open-focused = false;
+            }
+            {
+              matches = [
+                {
+                  app-id = "^com\\.chatterino";
+                  at-startup = true;
+                }
+                {
+                  app-id = "vesktop";
+                  at-startup = true;
+                }
+              ];
+              open-on-workspace = "chat";
+              open-focused = false;
+            }
+            {
+              matches = [
+                {
+                  app-id = "^com\\.chatterino";
+                }
+                {
+                  app-id = "vesktop";
+                }
+              ];
+              open-on-workspace = "chat";
+            }
+            {
+              match = _: {
+                props = {
+                  app-id = "Spotify";
+                };
+              };
+              open-on-workspace = "music";
+              open-focused = false;
+              open-maximized = true;
             }
           ];
 
