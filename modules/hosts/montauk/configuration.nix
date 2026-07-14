@@ -16,6 +16,7 @@
         steam
         helium
         mpv
+        thunar
         flatpak
         tailscale
         stremio

@@ -118,7 +118,7 @@
 
           binds = {
             "Mod+Return".spawn-sh = lib.getExe pkgs.ghostty;
-            "Mod+E".spawn-sh = lib.getExe pkgs.kdePackages.dolphin;
+            "Mod+E".spawn-sh = "thunar";
             "Mod+R".spawn-sh = "${myNoctaliaExe} ipc call launcher toggle";
             "Alt+L".spawn-sh = "${myNoctaliaExe} ipc call lockScreen lock";
 
