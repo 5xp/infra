@@ -20,6 +20,7 @@
         flatpak
         tailscale
         stremio
+        thunderbird
       ];
 
       environment.systemPackages = with pkgs; [
