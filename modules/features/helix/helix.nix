@@ -62,8 +62,14 @@
               formatter.command = "nixfmt";
               language-servers = [ "nixd" ];
             }
+            {
+              name = "rust";
+            }
           ];
-          language-server.nixd.command = "nixd";
+          language-server = {
+            nixd.command = "nixd";
+            rust-analyzer.config.check.command = "clippy";
+          };
         };
       };
     };
