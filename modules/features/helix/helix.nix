@@ -15,6 +15,8 @@
       packages.myHelix = inputs.wrapper-modules.wrappers.helix.wrap {
         inherit pkgs;
 
+        package = inputs.helix.packages.${pkgs.stdenv.hostPlatform.system}.default;
+
         runtimePkgs = with pkgs; [
           nixfmt
           nixd
