@@ -31,6 +31,7 @@
         pavucontrol
         ddcutil
         usbutils
+        imhex
       ];
 
       nix.settings.experimental-features = [
@@ -151,5 +152,8 @@
       services.xserver.videoDrivers = [ "nvidia" ];
 
       hardware.i2c.enable = true;
+
+      programs.wireshark.enable = true;
+      programs.wireshark.package = pkgs.wireshark;
     };
 }
