@@ -31,20 +31,27 @@
             color-modes = true;
             cursorline = true;
             scrolloff = 10;
-            idle-timeout = 0;
+            idle-timeout = 500;
             completion-timeout = 5;
             end-of-line-diagnostics = "hint";
             inline-diagnostics.cursor-line = "warning";
-            indent-guides.render = true;
+            trim-final-newlines = true;
+            trim-trailing-whitespace = true;
+            scroll-lines = 1;
             cursor-shape = {
               insert = "bar";
               normal = "block";
+            };
+            lsp = {
+              display-inlay-hints = true;
+              auto-document-highlight = true;
             };
           };
           keys = {
             normal = {
               tab = "move_parent_node_end";
               S-tab = "move_parent_node_start";
+              X = "extend_line_above";
             };
             insert = {
               S-tab = "move_parent_node_start";
@@ -52,6 +59,7 @@
             select = {
               tab = "extend_parent_node_end";
               S-tab = "extend_parent_node_start";
+              X = "extend_line_above";
             };
           };
         };
