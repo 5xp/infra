@@ -8,7 +8,6 @@
       unzip
       p7zip
       ncdu
-      secretspec
     ];
 
     programs.devenv.enable = true;
