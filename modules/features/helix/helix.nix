@@ -11,6 +11,7 @@
         extraPackages = with pkgs; [
           nixfmt
           nixd
+          tinymist
         ];
 
         themes.vague = ./vague.toml;
@@ -64,12 +65,24 @@
               language-servers = [ "nixd" ];
             }
             {
-              name = "rust";
+              name = "typst";
+              auto-format = true;
+              soft-wrap.enable = true;
+              rulers = [ 120 ];
             }
           ];
           language-server = {
             nixd.command = "nixd";
             rust-analyzer.config.check.command = "clippy";
+            tinymist.config = {
+              formatterMode = "typstyle";
+              formatterProseWrap = true;
+              formatterPrintWidth = 120;
+              lint = {
+                enabled = true;
+                when = "onType";
+              };
+            };
           };
         };
       };

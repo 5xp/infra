@@ -8,6 +8,7 @@
       unzip
       p7zip
       ncdu
+      typst
     ];
 
     programs.devenv.enable = true;
