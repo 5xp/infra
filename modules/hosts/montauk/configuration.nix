@@ -11,7 +11,6 @@
         home-manager
         chris
         niri
-        helix
         onepassword
         steam
         helium

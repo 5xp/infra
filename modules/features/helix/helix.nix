@@ -1,28 +1,19 @@
-{ self, inputs, ... }:
+{ inputs, ... }:
 {
-  flake.modules.nixos.helix =
+  flake.modules.homeManager.helix =
     { pkgs, ... }:
     {
-      environment.systemPackages = [
-        self.packages.${pkgs.stdenv.hostPlatform.system}.myHelix
-      ];
-      environment.variables.EDITOR = "hx";
-    };
-
-  perSystem =
-    { pkgs, ... }:
-    {
-      packages.myHelix = inputs.wrapper-modules.wrappers.helix.wrap {
-        inherit pkgs;
-
+      programs.helix = {
+        enable = true;
         package = inputs.helix.packages.${pkgs.stdenv.hostPlatform.system}.default;
+        defaultEditor = true;
 
-        runtimePkgs = with pkgs; [
+        extraPackages = with pkgs; [
           nixfmt
           nixd
         ];
 
-        themes.vague = builtins.readFile ./vague.toml;
+        themes.vague = ./vague.toml;
 
         settings = {
           theme = "vague";

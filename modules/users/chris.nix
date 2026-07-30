@@ -4,6 +4,7 @@
     imports = with self.modules.homeManager; [
       helium
       ghostty
+      helix
       git
       onepassword
       discord
