@@ -56,19 +56,35 @@
           layout = {
             gaps = 6;
             border = {
+              off = _: { };
               width = 2;
               active-color = "#bb9dbd";
               inactive-color = "#333738";
               urgent-color = "#d8647e";
             };
             focus-ring = {
+              off = _: { };
               width = 1;
               active-color = "#bb9dbd";
               inactive-color = "#333738";
-              urgent-color = "#00000000";
+              urgent-color = "transparent";
+            };
+            shadow = {
+              on = _: { };
+              softness = 7;
+              spread = 3;
+              offset = _: {
+                props = {
+                  x = 0;
+                  y = 0;
+                };
+              };
             };
             tab-indicator = {
               place-within-column = _: { };
+            };
+            default-column-width = {
+              proportion = 0.5;
             };
           };
 
@@ -91,6 +107,34 @@
                 };
               };
               open-floating = true;
+            }
+            {
+              match = _: {
+                props = {
+                  is-focused = false;
+                };
+              };
+              opacity = 0.88;
+              background-effect = {
+                noise = 0.1;
+                blur = true;
+                saturation = 2;
+              };
+            }
+
+            # urgent shadow instead of border, since that would cause resizing
+            {
+              match = _: {
+                props = {
+                  is-urgent = true;
+                };
+              };
+              shadow = {
+                on = _: { };
+                color = "#d8647e";
+                softness = 0;
+                spread = 2;
+              };
             }
 
             # startup app rules
@@ -206,7 +250,7 @@
             "Mod+Ctrl+F".expand-column-to-available-width = _: { };
 
             "Mod+D".switch-preset-column-width = _: { };
-            "Mod+Shift+D".switch-preset-window-height = _: { };
+            "Mod+Shift+D".switch-preset-column-width-back = _: { };
             "Mod+Ctrl+D".reset-window-height = _: { };
 
             "Mod+C".center-column = _: { };
@@ -214,6 +258,8 @@
 
             "Mod+Minus".set-column-width = "-10%";
             "Mod+Equal".set-column-width = "+10%";
+            "Mod+Shift+Minus".set-window-height = "-10%";
+            "Mod+Shift+Equal".set-window-height = "+10%";
 
             "Mod+V".toggle-window-floating = _: { };
             "Mod+Space".switch-focus-between-floating-and-tiling = _: { };
@@ -300,9 +346,6 @@
             "Mod+BracketLeft".consume-or-expel-window-left = _: { };
             "Mod+BracketRight".consume-or-expel-window-right = _: { };
 
-            "Mod+Comma".consume-window-into-column = _: { };
-            "Mod+Period".expel-window-from-column = _: { };
-
             "XF86AudioRaiseVolume" = _: {
               props.allow-when-locked = true;
               content.spawn = [
@@ -367,6 +410,19 @@
                 "previous"
               ];
             };
+
+            "Mod+Comma".spawn = [
+              (lib.getExe pkgs.playerctl)
+              "previous"
+            ];
+            "Mod+Period".spawn = [
+              (lib.getExe pkgs.playerctl)
+              "next"
+            ];
+            "Mod+Slash".spawn = [
+              (lib.getExe pkgs.playerctl)
+              "play-pause"
+            ];
           };
         };
       };
