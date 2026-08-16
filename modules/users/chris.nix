@@ -2,6 +2,7 @@
 {
   flake.modules.homeManager.chris = {
     imports = with self.modules.homeManager; [
+      audio
       helium
       ghostty
       helix

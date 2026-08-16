@@ -10,6 +10,7 @@
       imports = with self.modules.nixos; [
         home-manager
         chris
+        audio
         niri
         onepassword
         steam
@@ -27,8 +28,6 @@
         wget
         git
         fastfetch
-        easyeffects
-        pavucontrol
         ddcutil
         usbutils
         imhex
@@ -92,37 +91,6 @@
       services.xserver.xkb = {
         layout = "us";
         variant = "";
-      };
-
-      services.pulseaudio.enable = false;
-      security.rtkit.enable = true;
-      services.pipewire = {
-        enable = true;
-        alsa.enable = true;
-        alsa.support32Bit = true;
-        pulse.enable = true;
-        # If you want to use JACK applications, uncomment this
-        # jack.enable = true;
-
-        wireplumber.extraConfig.disableSuspendOnIdle = {
-          "monitor.alsa.rules" = [
-            {
-              matches = [
-                {
-                  "node.name" = "~alsa_input.*";
-                }
-                {
-                  "node.name" = "~alsa_output.*";
-                }
-              ];
-              actions = {
-                update-props = {
-                  "session.suspend-timeout-seconds" = 0;
-                };
-              };
-            }
-          ];
-        };
       };
 
       hardware.bluetooth = {
