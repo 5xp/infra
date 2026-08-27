@@ -103,6 +103,18 @@
         };
       };
 
+      zramSwap = {
+        enable = true;
+        priority = 100;
+      };
+
+      swapDevices = [
+        {
+          device = "/var/lib/swapfile";
+          size = 8 * 1024;
+        }
+      ];
+
       programs.firefox.enable = true;
 
       nixpkgs.config.allowUnfree = true;
