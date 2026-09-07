@@ -114,6 +114,18 @@
                   is-focused = false;
                 };
               };
+              excludes = [
+                {
+                  title = "^Picture in picture$";
+                }
+                {
+                  app-id = "helium";
+                  title = "Twitch|YouTube";
+                }
+                {
+                  title = "^Chatterino - Overlay$";
+                }
+              ];
               opacity = 0.88;
               background-effect = {
                 noise = 0.1;
@@ -301,8 +313,8 @@
             "Mod+Shift+Ctrl+L".move-column-to-monitor-right = _: { };
 
             "Mod+Alt+H".move-workspace-to-monitor-left = _: { };
-            "Mod+Alt+J".move-workspace-up = _: { };
-            "Mod+Alt+K".move-workspace-down = _: { };
+            "Mod+Alt+J".move-workspace-down = _: { };
+            "Mod+Alt+K".move-workspace-up = _: { };
             "Mod+Alt+L".move-workspace-to-monitor-right = _: { };
 
             "Mod+WheelScrollDown" = _: {
