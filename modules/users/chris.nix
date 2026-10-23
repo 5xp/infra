@@ -31,6 +31,7 @@
           "networkmanager"
           "wheel"
           "wireshark"
+          "input"
         ];
         shell = pkgs.fish;
       };
